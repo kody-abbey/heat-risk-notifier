@@ -1,0 +1,9 @@
+[project]
+name = "heat-risk-notifier"
+version = "0.1.0"
+description = "Notify heat stroke risk based on WBGT"
+dependencies = []
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
