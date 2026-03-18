@@ -1,12 +1,8 @@
 import csv
 from datetime import datetime, timedelta
 from src.app.config import WBGT_THRESHOLDS
-from dataclasses import dataclass
+from src.app.models import RiskLevel, WBGTData
 
-@dataclass
-class WBGTData:
-    time: datetime
-    value: float
 
 def load_wbgt(path):
     with open(path, newline="", encoding="utf-8") as f:
@@ -50,4 +46,8 @@ def parse_row(t: str, v: str):
 
     return WBGTData(time=dt, value=value)
 
-# def get_level_from_wbgt()
+def evaluate_risk(value: float) -> RiskLevel:
+    for level, threshold in WBGT_THRESHOLDS:
+        if value >= threshold:
+            return level
+    return RiskLevel.SAFE
